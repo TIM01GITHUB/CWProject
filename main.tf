@@ -3,7 +3,7 @@ terraform {
 backend "s3" {
     bucket         = "cw-tf"
     key            = "tf-infra/terraform.tfstate"
-    region         = "ap-southeast-1"
+    region         = "ap-southeast-2"
     dynamodb_table = "cw-project"
     encrypt        = true
   }
