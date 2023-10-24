@@ -1,19 +1,17 @@
 locals {
-  bucket_name = "cw-tf"
-  table_name  = "cw-project"
+  bucket_name = "cw01-aws-bucket"
+  table_name  = "cwTfDemo"
 
-  ecr_repo_name = "cw-app-ecr-repo"
-
-  cw_app_cluster_name        = "cw-app-cluster"
+  ecr_repo_name                = "demo-app-ecr-repo"
+  demo_app_cluster_name        = "demo-app-cluster"
   availability_zones           = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast-2c"]
-  cw_app_task_famliy         = "cw-app-task"
+  demo_app_task_famliy         = "demo-app-task"
   container_port               = 3000
-  cw_app_task_name           = "cw-app-task"
-  ecs_task_execution_role_name = "cw-app-task-execution-role"
+  demo_app_task_name           = "demo-app-task"
+  ecs_task_execution_role_name = "demo-app-task-execution-role"
 
-  application_load_balancer_name = "cw-app-alb"
-  target_group_name              = "cw-alb-tg"
+  application_load_balancer_name = "cc-demo-app-alb"
+  target_group_name              = "cc-demo-alb-tg"
 
-  cw_app_service_name = "cw-app-service"
- 
+  demo_app_service_name = "cc-demo-app-service"
 }
