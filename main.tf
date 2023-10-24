@@ -1,17 +1,19 @@
 terraform {
+  required_version = "~> 1.3"
 
-backend "s3" {
-    bucket         = "cw-tf"
+
+  backend "s3" {
+    bucket         = "cw01-aws-bucket"
     key            = "tf-infra/terraform.tfstate"
     region         = "ap-southeast-2"
-    dynamodb_table = "cw-project"
+    dynamodb_table = "cwTfDemo"
     encrypt        = true
   }
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.22.0"
+      version = "~> 4.0"
     }
   }
 }
@@ -22,7 +24,6 @@ module "tf-state" {
   table_name  = local.table_name
 }
 
-
 module "ecrRepo" {
   source = "./modules/ecr"
 
@@ -32,16 +33,16 @@ module "ecrRepo" {
 module "ecsCluster" {
   source = "./modules/ecs"
 
-  cw_app_cluster_name = local.cw_app_cluster_name
+  demo_app_cluster_name = local.demo_app_cluster_name
   availability_zones    = local.availability_zones
 
-  cw_app_task_famliy         = local.cw_app_task_famliy
+  demo_app_task_famliy         = local.demo_app_task_famliy
   ecr_repo_url                 = module.ecrRepo.repository_url
   container_port               = local.container_port
-  cw_app_task_name           = local.cw_app_task_name
+  demo_app_task_name           = local.demo_app_task_name
   ecs_task_execution_role_name = local.ecs_task_execution_role_name
 
   application_load_balancer_name = local.application_load_balancer_name
   target_group_name              = local.target_group_name
-  cw_app_service_name          = local.cw_app_service_name
+  demo_app_service_name          = local.demo_app_service_name
 }
